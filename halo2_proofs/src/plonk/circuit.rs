@@ -29,9 +29,9 @@ pub trait ColumnType:
 /// A column with an index and type
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct Column<C: ColumnType> {
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub index: usize,
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub column_type: C,
 }
 
@@ -156,7 +156,7 @@ impl SealedPhase for super::ThirdPhase {
 /// An advice column
 #[derive(Clone, Copy, Eq, PartialEq, Hash)]
 pub struct Advice {
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub phase: sealed::Phase,
 }
 
@@ -455,7 +455,7 @@ impl TryFrom<Column<Any>> for Column<Instance> {
 /// }
 /// ```
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
-///Analyzer
+/// Visibility changed for analyzer
 pub struct Selector(pub usize, bool);
 
 impl Selector {
@@ -482,10 +482,10 @@ pub struct FixedQuery {
     /// Query index
     pub(crate) index: Option<usize>,
     /// Column index
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub column_index: usize,
     /// Rotation of this query
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub rotation: Rotation,
 }
 
@@ -505,13 +505,13 @@ impl FixedQuery {
 #[derive(Copy, Clone, Debug)]
 pub struct AdviceQuery {
     /// Query index
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub index: Option<usize>,
     /// Column index
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub column_index: usize,
     /// Rotation of this query
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub rotation: Rotation,
     /// Phase of this advice column
     pub(crate) phase: sealed::Phase,
@@ -1499,7 +1499,7 @@ impl<F: Field, C: Into<Constraint<F>>, Iter: IntoIterator<Item = C>> IntoIterato
 pub struct Gate<F: Field> {
     name: String,
     constraint_names: Vec<String>,
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub polys: Vec<Expression<F>>,
     /// We track queried selectors separately from other cells, so that we can use them to
     /// trigger debug checks on gates.
@@ -1508,7 +1508,7 @@ pub struct Gate<F: Field> {
 }
 
 impl<F: Field> Gate<F> {
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub fn name(&self) -> &str {
         self.name.as_str()
     }
@@ -1551,9 +1551,9 @@ pub struct ConstraintSystem<F: Field> {
     /// tooling right now.
     pub(crate) selector_map: Vec<Column<Fixed>>,
 
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub gates: Vec<Gate<F>>,
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub advice_queries: Vec<(Column<Advice>, Rotation)>,
     // Contains an integer for each advice column
     // identifying how many distinct queries it has
@@ -1567,7 +1567,7 @@ pub struct ConstraintSystem<F: Field> {
 
     // Vector of lookup arguments, where each corresponds to a sequence of
     // input expressions and a sequence of table expressions involved in the lookup.
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub lookups: Vec<lookup::Argument<F>>,
 
     // List of indexes of Fixed columns which are associated to a circuit-general Column tied to their annotation.

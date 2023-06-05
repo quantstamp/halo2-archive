@@ -49,7 +49,7 @@ pub trait Chip<F: Field>: Sized {
 
 /// Index of a region in a layouter
 #[derive(Clone, Copy, Debug)]
-///Analyzer
+/// Visibility changed for analyzer
 pub struct RegionIndex(pub usize);
 
 impl From<usize> for RegionIndex {
@@ -88,13 +88,13 @@ impl std::ops::Deref for RegionStart {
 #[derive(Clone, Copy, Debug)]
 pub struct Cell {
     /// Identifies the region in which this cell resides.
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub region_index: RegionIndex,
     /// The relative offset of this cell within its region.
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub row_offset: usize,
     /// The column of this cell.
-    ///Analyzer
+    /// Visibility changed for analyzer
     pub column: Column<Any>,
 }
 
