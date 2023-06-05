@@ -300,7 +300,8 @@ pub struct MockProver<F: Field> {
     current_region: Option<Region>,
 
     // The fixed cells in the circuit, arranged as [column][row].
-    fixed: Vec<Vec<CellValue<F>>>,
+    /// Visibility changed for analyzer
+    pub fixed: Vec<Vec<CellValue<F>>>,
     // The advice cells in the circuit, arranged as [column][row].
     advice: Vec<Vec<CellValue<F>>>,
     // The instance cells in the circuit, arranged as [column][row].
