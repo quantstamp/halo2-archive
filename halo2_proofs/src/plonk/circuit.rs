@@ -29,8 +29,10 @@ pub trait ColumnType:
 /// A column with an index and type
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub struct Column<C: ColumnType> {
-    index: usize,
-    column_type: C,
+    ///Analyzer
+    pub index: usize,
+    ///Analyzer
+    pub column_type: C,
 }
 
 impl<C: ColumnType> Column<C> {
@@ -154,7 +156,8 @@ impl SealedPhase for super::ThirdPhase {
 /// An advice column
 #[derive(Clone, Copy, Eq, PartialEq, Hash)]
 pub struct Advice {
-    pub(crate) phase: sealed::Phase,
+    ///Analyzer
+    pub phase: sealed::Phase,
 }
 
 impl Default for Advice {
@@ -452,7 +455,8 @@ impl TryFrom<Column<Any>> for Column<Instance> {
 /// }
 /// ```
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
-pub struct Selector(pub(crate) usize, bool);
+///Analyzer
+pub struct Selector(pub usize, bool);
 
 impl Selector {
     /// Enable this selector at the given offset within the given region.
@@ -478,9 +482,11 @@ pub struct FixedQuery {
     /// Query index
     pub(crate) index: Option<usize>,
     /// Column index
-    pub(crate) column_index: usize,
+    ///Analyzer
+    pub column_index: usize,
     /// Rotation of this query
-    pub(crate) rotation: Rotation,
+    ///Analyzer
+    pub rotation: Rotation,
 }
 
 impl FixedQuery {
@@ -499,11 +505,14 @@ impl FixedQuery {
 #[derive(Copy, Clone, Debug)]
 pub struct AdviceQuery {
     /// Query index
-    pub(crate) index: Option<usize>,
+    ///Analyzer
+    pub index: Option<usize>,
     /// Column index
-    pub(crate) column_index: usize,
+    ///Analyzer
+    pub column_index: usize,
     /// Rotation of this query
-    pub(crate) rotation: Rotation,
+    ///Analyzer
+    pub rotation: Rotation,
     /// Phase of this advice column
     pub(crate) phase: sealed::Phase,
 }
@@ -1490,7 +1499,8 @@ impl<F: Field, C: Into<Constraint<F>>, Iter: IntoIterator<Item = C>> IntoIterato
 pub struct Gate<F: Field> {
     name: String,
     constraint_names: Vec<String>,
-    polys: Vec<Expression<F>>,
+    ///Analyzer
+    pub polys: Vec<Expression<F>>,
     /// We track queried selectors separately from other cells, so that we can use them to
     /// trigger debug checks on gates.
     queried_selectors: Vec<Selector>,
@@ -1498,7 +1508,8 @@ pub struct Gate<F: Field> {
 }
 
 impl<F: Field> Gate<F> {
-    pub(crate) fn name(&self) -> &str {
+    ///Analyzer
+    pub fn name(&self) -> &str {
         self.name.as_str()
     }
 
@@ -1540,8 +1551,10 @@ pub struct ConstraintSystem<F: Field> {
     /// tooling right now.
     pub(crate) selector_map: Vec<Column<Fixed>>,
 
-    pub(crate) gates: Vec<Gate<F>>,
-    pub(crate) advice_queries: Vec<(Column<Advice>, Rotation)>,
+    ///Analyzer
+    pub gates: Vec<Gate<F>>,
+    ///Analyzer
+    pub advice_queries: Vec<(Column<Advice>, Rotation)>,
     // Contains an integer for each advice column
     // identifying how many distinct queries it has
     // so far; should be same length as num_advice_columns.
@@ -1554,7 +1567,8 @@ pub struct ConstraintSystem<F: Field> {
 
     // Vector of lookup arguments, where each corresponds to a sequence of
     // input expressions and a sequence of table expressions involved in the lookup.
-    pub(crate) lookups: Vec<lookup::Argument<F>>,
+    ///Analyzer
+    pub lookups: Vec<lookup::Argument<F>>,
 
     // List of indexes of Fixed columns which are associated to a circuit-general Column tied to their annotation.
     pub(crate) general_column_annotations: HashMap<metadata::Column, String>,
